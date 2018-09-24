@@ -8,6 +8,7 @@ class App extends Component {
         super();
         this.state = {tasks: props.tasks};
         this.updateList = this.updateList.bind(this);
+        this.removeTask = this.removeTask.bind(this);
     }
 
     updateList(text){
@@ -16,12 +17,18 @@ class App extends Component {
         this.setState({tasks: updateTasks});
     }
 
+    removeTask(text){
+        var updateTasks = this.state.tasks;
+        updateTasks.splice(updateTasks.indexOf(text), 1);
+        this.setState({tasks: updateTasks});
+    }
+
     render() {
         return (
             <div>
                 <h1>ToDoApp</h1>
                 <AddNewTask updateList = {this.updateList}/>
-                <ToDoAppList tasks={this.state.tasks}/>
+                <ToDoAppList tasks={this.state.tasks} remove={this.removeTask}/>
             </div>
         );
     }
