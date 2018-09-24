@@ -13,14 +13,20 @@ class App extends Component {
 
     updateList(text){
         var updateTasks = this.state.tasks;
-        updateTasks.push(text);
+        updateTasks.unshift(text);
         this.setState({tasks: updateTasks});
+        this.updateLocalStorage(updateTasks);
     }
 
     removeTask(text){
         var updateTasks = this.state.tasks;
         updateTasks.splice(updateTasks.indexOf(text), 1);
         this.setState({tasks: updateTasks});
+        this.updateLocalStorage(updateTasks);
+    }
+
+    updateLocalStorage(updateTasks){
+        localStorage.setItem('storedTasks', JSON.stringify(updateTasks));
     }
 
     render() {
